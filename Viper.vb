@@ -21,16 +21,16 @@ Sub Viper_Refresh()
     
     'Inserting data into form
     ViperForm.UserName.Caption = Application.UserName
-    ViperForm.itemNumberLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnItemNumber).Value
-    ViperForm.CurrentItemLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnItemNumber).Value
+    ViperForm.itemNumberLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnID).Value
+    ViperForm.CurrentItemLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnID).Value
     ViperForm.SeverityLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnSeverity).Value
     ViperForm.ModuleLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnModule).Value
     ViperForm.FirstTriggerLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFirstTrigger).Value
-    ViperForm.UrlLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFilePath).Value
-    ViperForm.CauseLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnCause).Value + " - " + ActiveSheet.Cells(currentRow, Configuration.columnCauseExplanation).Value
+    ViperForm.UrlLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFolderPath).Value
+    ViperForm.CauseLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnTriggerID).Value + " - " + ActiveSheet.Cells(currentRow, Configuration.columnCause).Value
     ViperForm.flagStatus.Text = ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value
     
-    If ActiveSheet.Cells(currentRow, Configuration.columnClosed).Value <> "" Then
+    If ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value <> "" Then
         ViperForm.ClosedCheckbox.Value = True
         Else: ViperForm.ClosedCheckbox.Value = False
     End If
@@ -39,11 +39,11 @@ Sub Viper_Refresh()
        
     'Safeguards to avoid crash if values are not initialized...
     If prevRow > 0 Then
-        ViperForm.prevButton.Caption = "" & ActiveSheet.Cells(prevRow, Configuration.columnItemNumber).Value & " << Previous"
+        ViperForm.prevButton.Caption = "" & ActiveSheet.Cells(prevRow, Configuration.columnID).Value & " << Previous"
     End If
     
     If nextRow > 0 Then
-        ViperForm.nextButton.Caption = "Next >> " & ActiveSheet.Cells(nextRow, Configuration.columnItemNumber).Value
+        ViperForm.nextButton.Caption = "Next >> " & ActiveSheet.Cells(nextRow, Configuration.columnID).Value
     End If
     
     ViperForm.currentRowLabel = currentRow
@@ -56,7 +56,7 @@ Sub Viper_Refresh()
     
     'Getting File Path
     Dim filePath As String
-    filePath = "file:" & ActiveSheet.Cells(currentRow, Configuration.columnFilePath).Value & "/video/" & ActiveSheet.Cells(currentRow, Configuration.columnFileName).Value & ".avi"
+    filePath = "file:" & ActiveSheet.Cells(currentRow, Configuration.columnFolderPath).Value & "/video/" & ActiveSheet.Cells(currentRow, Configuration.columnFileName).Value & ".avi"
     filePath = Replace(filePath, "\", "/")
     
     'Starting Video
@@ -78,13 +78,13 @@ Sub Viper_Save()
 
     If IsNumeric(ViperForm.itemNumberLabel.Caption) Then
         
-        ActiveSheet.Cells(currentRow, Configuration.columnViewedBy).Value = ViperForm.UserName.Caption
+        ActiveSheet.Cells(currentRow, Configuration.columnViewer).Value = ViperForm.UserName.Caption
         ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value = ViperForm.flagStatus.Text
         
         If ViperForm.ClosedCheckbox.Value = True Then
-            ActiveSheet.Cells(currentRow, Configuration.columnClosed).Value = "yes"
+            ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = "yes"
         Else
-            ActiveSheet.Cells(currentRow, Configuration.columnClosed).Value = ""
+            ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = ""
         End If
         
     ActiveSheet.Cells(currentRow, Configuration.columnViewerNotes).Value = ViperForm.ViewerNotesTextbox.Text
