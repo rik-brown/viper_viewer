@@ -1,8 +1,13 @@
 
+
 Private Sub CancelExitButton_Click()
     ViperForm.Hide
 End Sub
 
+
+Private Sub ClosedCheckbox_Click()
+
+End Sub
 
 Private Sub ConsumerSessonLink_Click()
     ActiveWorkbook.FollowHyperlink Address:=("https://www1.tomraconnect.com/page/installation/consumersession/list?installation=" & Configuration.tomraConnectInstallationNo), NewWindow:=True
@@ -16,6 +21,10 @@ End Sub
 Private Sub InstallationDetailsLink_Click()
     ActiveWorkbook.FollowHyperlink Address:=("https://www1.tomraconnect.com/page/installation/details?installation=" & Configuration.tomraConnectInstallationNo), NewWindow:=True
     'ActiveWorkbook.FollowHyperlink Address:="https://www1.tomraconnect.com/page/installation/details?installation=28210", NewWindow:=True
+End Sub
+
+Private Sub Label3_Click()
+
 End Sub
 
 Private Sub nextButton_Click()

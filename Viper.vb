@@ -27,7 +27,6 @@ Sub Viper_Refresh()
     ViperForm.ModuleLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnModule).Value
     ViperForm.FirstTriggerLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFirstTrigger).Value
     ViperForm.UrlLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFilePath).Value
-    ViperForm.ViewedBeforeLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnViewed).Value
     ViperForm.CauseLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnCause).Value + " - " + ActiveSheet.Cells(currentRow, Configuration.columnCauseExplanation).Value
     ViperForm.flagStatus.Text = ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value
     
@@ -80,7 +79,6 @@ Sub Viper_Save()
     If IsNumeric(ViperForm.itemNumberLabel.Caption) Then
         
         ActiveSheet.Cells(currentRow, Configuration.columnViewedBy).Value = ViperForm.UserName.Caption
-        ActiveSheet.Cells(currentRow, Configuration.columnViewed).Value = "yes"
         ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value = ViperForm.flagStatus.Text
         
         If ViperForm.ClosedCheckbox.Value = True Then

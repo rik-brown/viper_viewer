@@ -20,20 +20,19 @@ Public tomraConnectInstallationNo As Integer
 
 Function Configuration_Init()
     'Set column number here...
-    columnItemNumber = 2
-    columnFilePath = 3
-    columnFileName = 4
-    columnVideoLink = 5
-    columnFirstTrigger = 6
-    columnCause = 7
-    columnSeverity = 8
-    columnModule = 9
-    columnCauseExplanation = 10
-    columnViewed = 11
-    columnViewerNotes = 12
-    columnViewedBy = 13
-    columnFlag = 14
-    columnClosed = 15
+    columnItemNumber = 1
+    columnFilePath = 2
+    columnFileName = 3
+    columnVideoLink = 9
+    columnFirstTrigger = 11
+    columnCause = 5
+    columnSeverity = 6
+    columnModule = 7
+    columnCauseExplanation = 8
+    columnViewerNotes = 13
+    columnViewedBy = 12
+    columnFlag = 18
+    columnClosed = 19
     
     tomraConnectInstallationNo = 28210
     
