@@ -21,9 +21,17 @@ Private Sub CancelExitButton_Click()
 End Sub
 
 
+Private Sub ClosedCheckbox_Click()
+
+End Sub
+
 Private Sub ConsumerSessonLink_Click()
     ActiveWorkbook.FollowHyperlink Address:=("https://www1.tomraconnect.com/page/installation/consumersession/list?installation=" & Configuration.tomraConnectInstallationNo), NewWindow:=True
     'ActiveWorkbook.FollowHyperlink Address:="https://www1.tomraconnect.com/page/installation/view?installation=28210", NewWindow:=True
+End Sub
+
+Private Sub FlagCheckBox_Click()
+
 End Sub
 
 Private Sub FullscreenButton_Click()
@@ -66,6 +74,10 @@ End Sub
 
 Private Sub PrevHiddenButton_Click()
     Call Viper.Viper_PrevHidden
+End Sub
+
+Private Sub ReviewedCheckBox_Click()
+
 End Sub
 
 Private Sub SpeedButton025x_Click()
