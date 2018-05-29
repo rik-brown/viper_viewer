@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ViperForm 
    Caption         =   "Viper Analysis"
-   ClientHeight    =   9555
+   ClientHeight    =   10485
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   18930
@@ -38,9 +38,17 @@ Private Sub FullscreenButton_Click()
     Call Viper.Viper_Fullscreen
 End Sub
 
+Private Sub IDLabel_Click()
+
+End Sub
+
 Private Sub InstallationDetailsLink_Click()
     ActiveWorkbook.FollowHyperlink Address:=("https://www1.tomraconnect.com/page/installation/details?installation=" & Configuration.tomraConnectInstallationNo), NewWindow:=True
     'ActiveWorkbook.FollowHyperlink Address:="https://www1.tomraconnect.com/page/installation/details?installation=28210", NewWindow:=True
+End Sub
+
+Private Sub isPlaying_Change()
+
 End Sub
 
 Private Sub nextButton_Click()

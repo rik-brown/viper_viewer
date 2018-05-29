@@ -14,27 +14,27 @@ Sub Viper_Refresh()
     Dim flagList As Collection
     
     Set flagList = Helpers.CollectUniques(ActiveSheet.Range("N:N"))
+    'Set flagList = Helpers.CollectUniques(ActiveSheet.ListObjects("Triggers").ListColumns(14).DataBodyRange.Select)
     
-    ViperForm.flagStatus.Clear
+    ViperForm.issueSelecter.Clear
     For Each flagType In flagList
-        ViperForm.flagStatus.AddItem flagType
+        ViperForm.issueSelecter.AddItem flagType
     Next
     
     'Inserting data into form
     ViperForm.UserName.Caption = Application.UserName
-    ViperForm.itemNumberLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnID).Value
+    ViperForm.IDLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnID).Value
     ViperForm.CurrentItemLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnID).Value
-    ViperForm.SeverityLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnSeverity).Value
-    ViperForm.ModuleLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnModule).Value
+    ViperForm.SeverityLabel.Caption = "Severity:" & ActiveSheet.Cells(currentRow, Configuration.columnSeverity).Value
+    ViperForm.ModuleLabel.Caption = "Module:" & ActiveSheet.Cells(currentRow, Configuration.columnModule).Value
     ViperForm.FirstTriggerLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFirstTrigger).Value
     ViperForm.UrlLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFolderPath).Value
-    ViperForm.ViewedBeforeLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnViewed).Value
     ViperForm.CauseLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnTriggerID).Value + " - " + ActiveSheet.Cells(currentRow, Configuration.columnCauseExplanation).Value
-    ViperForm.flagStatus.Text = ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value
+    ViperForm.issueSelecter.Text = ActiveSheet.Cells(currentRow, Configuration.columnIssueID).Value
     
     If ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value <> "" Then
-        ViperForm.ReviewedCheckbox.Value = True
-        Else: ViperForm.ReviewedCheckbox.Value = False
+        ViperForm.ReviewedCheckBox.Value = True
+        Else: ViperForm.ReviewedCheckBox.Value = False
     End If
     
     If ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value <> "" Then
@@ -45,15 +45,15 @@ Sub Viper_Refresh()
     ViperForm.ViewerNotesTextbox.Text = ActiveSheet.Cells(currentRow, Configuration.columnViewerNotes).Value
        
     'Safeguards to avoid crash if values are not initialized...
-    If prevRow > 0 Then
-        ViperForm.prevButton.Caption = "" & ActiveSheet.Cells(prevRow, Configuration.columnID).Value & " << Previous"
-    End If
+    'If prevRow > 0 Then
+    '    ViperForm.prevButton.Caption = "" & ActiveSheet.Cells(prevRow, Configuration.columnID).Value & " << Previous"
+    'End If
     
-    If nextRow > 0 Then
-        ViperForm.nextButton.Caption = "Next >> " & ActiveSheet.Cells(nextRow, Configuration.columnID).Value
-    End If
+    'If nextRow > 0 Then
+    '    ViperForm.nextButton.Caption = "Next >> " & ActiveSheet.Cells(nextRow, Configuration.columnID).Value
+    'End If
     
-    ViperForm.currentRowLabel = currentRow
+    'ViperForm.currentRowLabel = currentRow
     
     
     '-- Loading video --
@@ -71,11 +71,11 @@ Sub Viper_Refresh()
     ViperForm.ViperPlayer.Playlist.Add (filePath)
     ViperForm.ViperPlayer.Playlist.Play
     
-    ViperForm.TextBox1.Text = ViperForm.ViperPlayer.Playlist.isPlaying
+    'ViperForm.isPlaying.Text = ViperForm.ViperPlayer.Playlist.isPlaying
     
-    If ViperForm.ViperPlayer.Playlist.isPlaying Then
-        ViperForm.TextBox1.Text = filePath
-    End If
+    'If ViperForm.ViperPlayer.Playlist.isPlaying Then
+    '    ViperForm.isPlaying.Text = filePath
+    'End If
         
 End Sub
 
@@ -83,13 +83,12 @@ Sub Viper_Save()
 
     Call Viper_Stop
 
-    If IsNumeric(ViperForm.itemNumberLabel.Caption) Then
+    If IsNumeric(ViperForm.IDLabel.Caption) Then
         
         ActiveSheet.Cells(currentRow, Configuration.columnViewer).Value = ViperForm.UserName.Caption
-        ActiveSheet.Cells(currentRow, Configuration.columnViewed).Value = "yes"
-        ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value = ViperForm.flagStatus.Text
+        ActiveSheet.Cells(currentRow, Configuration.columnIssueID).Value = ViperForm.issueSelecter.Text
         
-        If ViperForm.ReviewedCheckbox.Value = True Then
+        If ViperForm.ReviewedCheckBox.Value = True Then
             ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = "x"
         Else
             ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = ""
