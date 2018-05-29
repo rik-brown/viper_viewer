@@ -15,6 +15,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Private Sub CancelExitButton_Click()
     ViperForm.Hide
 End Sub
@@ -23,10 +24,6 @@ End Sub
 Private Sub ConsumerSessonLink_Click()
     ActiveWorkbook.FollowHyperlink Address:=("https://www1.tomraconnect.com/page/installation/consumersession/list?installation=" & Configuration.tomraConnectInstallationNo), NewWindow:=True
     'ActiveWorkbook.FollowHyperlink Address:="https://www1.tomraconnect.com/page/installation/view?installation=28210", NewWindow:=True
-End Sub
-
-Private Sub flagStatus_Change()
-
 End Sub
 
 Private Sub FullscreenButton_Click()

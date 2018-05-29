@@ -1,3 +1,4 @@
+Attribute VB_Name = "Viper"
 'API for VLC Plugin:
 'https://wiki.videolan.org/Documentation:WebPlugin/
 
