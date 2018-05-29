@@ -28,11 +28,16 @@ Sub Viper_Refresh()
     ViperForm.FirstTriggerLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFirstTrigger).Value
     ViperForm.UrlLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnFolderPath).Value
     ViperForm.CauseLabel.Caption = ActiveSheet.Cells(currentRow, Configuration.columnTriggerID).Value + " - " + ActiveSheet.Cells(currentRow, Configuration.columnCause).Value
-    ViperForm.flagStatus.Text = ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value
     
-    If ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value <> "" Then
-        ViperForm.ClosedCheckbox.Value = True
-        Else: ViperForm.ClosedCheckbox.Value = False
+    
+    If ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value <> "" Then
+        ViperForm.FlagCheckbox.Value = True
+        Else: ViperForm.FlagCheckbox.Value = False
+    End If
+	
+	If ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value <> "" Then
+        ViperForm.ReviewedCheckbox.Value = True
+        Else: ViperForm.ReviewedCheckbox.Value = False
     End If
     
     ViperForm.ViewerNotesTextbox.Text = ActiveSheet.Cells(currentRow, Configuration.columnViewerNotes).Value
@@ -79,13 +84,19 @@ Sub Viper_Save()
     If IsNumeric(ViperForm.itemNumberLabel.Caption) Then
         
         ActiveSheet.Cells(currentRow, Configuration.columnViewer).Value = ViperForm.UserName.Caption
-        ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value = ViperForm.flagStatus.Text
         
-        If ViperForm.ClosedCheckbox.Value = True Then
-            ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = "yes"
+        If ViperForm.FlagCheckbox.Value = True Then
+            ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value = "x"
+        Else
+            ActiveSheet.Cells(currentRow, Configuration.columnFlag).Value = ""
+        End If
+		
+		If ViperForm.ReviewedCheckbox.Value = True Then
+            ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = "x"
         Else
             ActiveSheet.Cells(currentRow, Configuration.columnReviewed).Value = ""
         End If
+		
         
     ActiveSheet.Cells(currentRow, Configuration.columnViewerNotes).Value = ViperForm.ViewerNotesTextbox.Text
     
@@ -199,7 +210,6 @@ Sub Viper_Fullscreen()
     ViperForm.ViperPlayer.video.fullscreen = True
 End Sub
 
-
 Sub Viper_Open(row As Integer)
     
     'Initializing
@@ -208,7 +218,6 @@ Sub Viper_Open(row As Integer)
 
     Call Viper_FindNext
     Call Viper_FindPrev
-        
     Call Viper_Refresh
     
     ViperForm.Show
